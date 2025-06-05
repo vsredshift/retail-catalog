@@ -23,7 +23,7 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 10px 180px;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -52,6 +52,63 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Product List Grid */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Product Preview Card */
+.product-preview {
+  display: block;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-preview:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Text Styles */
+.product-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.product-category {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.product-price {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2563eb;
+}
+
+.heading {
+  padding-left: 1rem;
 }
 
 @media (prefers-color-scheme: light) {

@@ -13,8 +13,7 @@ export const Home = () => {
   }, []);
 
   return <div>
-    <h1>Product Catalogue</h1>
-    <h3>{products.length}</h3>
+    <h1 className="heading">Product Catalogue</h1>
     <ProductList products={products}/>
   </div>;
 };
