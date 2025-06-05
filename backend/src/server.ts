@@ -1,15 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import productRoutes from "../src/routes/productRoutes";
+import productRoutes from "../src/routes/productRoutes.js";
 
 dotenv.config();
 
 const app = express();
 
 app
-  .use(cors())
   .use(express.json())
+  .use(cors())
   .use(express.urlencoded({ extended: false }));
 
 app.use("/v1/api/products", productRoutes);
