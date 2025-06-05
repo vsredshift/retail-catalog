@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { addProduct, getProducts } from "../data/products.js";
 import { Product } from "../models/product.js";
+import { damerauLevenshtein } from "../utils/damerauLevenshtein.js";
 
 /**
  * @description Get paginated list of products
@@ -91,14 +92,33 @@ export const searchProducts = (req: Request, res: Response) => {
     return;
   }
 
+  const searchTerm = name.toLowerCase().trim();
   const allProducts = getProducts();
-  allProducts.map(product => console.log(product.name))
-  const matches = allProducts.filter(
-    (product) => product.name.toLowerCase() === name.toLowerCase()
-  );
+  const maxDistance = 2; // For fuzzy match, e.g., "kalax" vs "kallax"
+
+  const matches = allProducts
+    .map((product) => {
+      const productName = product.name.toLowerCase();
+      const nameWords = productName.split(/\s+/);
+
+      const score = (() => {
+        if (productName.startsWith(searchTerm)) return 0;
+        if (productName.includes(searchTerm)) return 1;
+        if (nameWords.some((word) => word.startsWith(searchTerm))) return 2;
+
+        const distance = damerauLevenshtein(productName, searchTerm);
+        return distance <= maxDistance ? 3 + distance : Infinity;
+      })();
+
+      return { product, score };
+    })
+    .filter((entry) => entry.score !== Infinity)
+    .sort((a, b) => a.score - b.score)
+    .map((entry) => entry.product);
 
   res.json({
     count: matches.length,
     results: matches,
   });
 };
+
