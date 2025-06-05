@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "LACK Coffee Table",
+    "category": "Living Room",
+    "description": "Simple, stylish coffee table with a smooth surface and low profile.",
+    "price": 29.99,
+    "imageUrl": "https://example.com/images/lack-coffee-table.jpg"
+  },
+  {
+    "id": 2,
+    "name": "BILLY Bookcase",
+    "category": "Storage",
+    "description": "Classic bookcase with adjustable shelves for flexible storage.",
+    "price": 49.99,
+    "imageUrl": "https://example.com/images/billy-bookcase.jpg"
+  },
+  {
+    "id": 3,
+    "name": "POÄNG Armchair",
+    "category": "Living Room",
+    "description": "Comfortable and stylish armchair with a bentwood frame.",
+    "price": 79.99,
+    "imageUrl": "https://example.com/images/poang-armchair.jpg"
+  },
+  {
+    "id": 4,
+    "name": "MALM Bed Frame",
+    "category": "Bedroom",
+    "description": "Modern bed frame with a high headboard and spacious storage drawers.",
+    "price": 199.99,
+    "imageUrl": "https://example.com/images/malm-bed.jpg"
+  },
+  {
+    "id": 5,
+    "name": "HEMNES Dresser",
+    "category": "Bedroom",
+    "description": "Solid wood dresser with 6 spacious drawers.",
+    "price": 159.99,
+    "imageUrl": "https://example.com/images/hemnes-dresser.jpg"
+  },
+  {
+    "id": 6,
+    "name": "KALLAX Shelf Unit",
+    "category": "Storage",
+    "description": "Versatile cube shelving unit for organizing your space.",
+    "price": 69.99,
+    "imageUrl": "https://example.com/images/kallax-shelf.jpg"
+  },
+  {
+    "id": 7,
+    "name": "ADDE Chair",
+    "category": "Dining",
+    "description": "Lightweight, stackable chair perfect for extra seating.",
+    "price": 12.99,
+    "imageUrl": "https://example.com/images/adde-chair.jpg"
+  },
+  {
+    "id": 8,
+    "name": "INGATORP Dining Table",
+    "category": "Dining",
+    "description": "Extendable dining table with a traditional look.",
+    "price": 149.99,
+    "imageUrl": "https://example.com/images/ingatorp-table.jpg"
+  },
+  {
+    "id": 9,
+    "name": "FÄRGRIK Dinnerware Set",
+    "category": "Kitchen",
+    "description": "18-piece stoneware dinner set with a clean, modern design.",
+    "price": 29.99,
+    "imageUrl": "https://example.com/images/fargrik-dinnerware.jpg"
+  },
+  {
+    "id": 10,
+    "name": "RÅSKOG Utility Cart",
+    "category": "Storage",
+    "description": "Mobile utility cart perfect for kitchens or offices.",
+    "price": 39.99,
+    "imageUrl": "https://example.com/images/raskog-cart.jpg"
+  },
+  {
+    "id": 11,
+    "name": "SÖDERHAMN Sofa",
+    "category": "Living Room",
+    "description": "Modular sofa series with deep seats and loose back cushions.",
+    "price": 499.99,
+    "imageUrl": "https://example.com/images/soderhamn-sofa.jpg"
+  },
+  {
+    "id": 12,
+    "name": "LISABO Desk",
+    "category": "Office",
+    "description": "Durable ash desk with clean lines and smooth finish.",
+    "price": 119.99,
+    "imageUrl": "https://example.com/images/lisabo-desk.jpg"
+  }
+]
