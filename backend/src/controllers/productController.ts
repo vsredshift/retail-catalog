@@ -30,7 +30,7 @@ export const getAllProducts = (req: Request, res: Response) => {
     limit,
     totalItems,
     totalPages,
-    data: paginated,
+    products: paginated,
   });
 };
 
