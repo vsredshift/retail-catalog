@@ -12,7 +12,7 @@ app
   .use(cors())
   .use(express.urlencoded({ extended: false }));
 
-app.use("/v1/api/products", productRoutes);
+app.use("/v1/api", productRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

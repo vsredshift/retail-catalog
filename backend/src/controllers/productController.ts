@@ -77,3 +77,28 @@ export const getProductById = (req: Request, res: Response) => {
 
   res.json(product);
 };
+
+/**
+ * @description Search for a product by name
+ * @route       GET v1/api/search?name=<ProductName>
+ * @access      Public
+ */
+export const searchProducts = (req: Request, res: Response) => {
+  const { name } = req.query;
+
+  if (!name || typeof name !== "string") {
+    res.status(400).json({ message: "Query parameter 'name' is required" });
+    return;
+  }
+
+  const allProducts = getProducts();
+  allProducts.map(product => console.log(product.name))
+  const matches = allProducts.filter(
+    (product) => product.name.toLowerCase() === name.toLowerCase()
+  );
+
+  res.json({
+    count: matches.length,
+    results: matches,
+  });
+};
