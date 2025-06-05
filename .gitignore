@@ -1,7 +1,19 @@
-node_modules
-dist
 
-.env
+# Environment files (at any level)
+**/.env
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
+.env*
 
-.qodo
-.vscode
+# Dependency directories (recursive)
+**/node_modules/
+
+# Build directories
+dist/
+build/
+out/
+
+**/.vscode
+**/.qodo
