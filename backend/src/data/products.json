@@ -94,5 +94,101 @@
     "description": "Durable ash desk with clean lines and smooth finish.",
     "price": 119.99,
     "imageUrl": "https://example.com/images/lisabo-desk.jpg"
+  },
+  {
+    "id": 13,
+    "name": "MARKUS Office Chair",
+    "category": "Office",
+    "description": "High-back ergonomic chair with adjustable height and lumbar support.",
+    "price": 229.99,
+    "imageUrl": "https://example.com/images/markus-chair.jpg"
+  },
+  {
+    "id": 14,
+    "name": "BRIMNES TV Unit",
+    "category": "Living Room",
+    "description": "Compact TV stand with drawers for media storage.",
+    "price": 89.99,
+    "imageUrl": "https://example.com/images/brimnes-tv.jpg"
+  },
+  {
+    "id": 15,
+    "name": "IVAR Storage System",
+    "category": "Storage",
+    "description": "Customizable shelving system for any room.",
+    "price": 149.99,
+    "imageUrl": "https://example.com/images/ivar-shelf.jpg"
+  },
+  {
+    "id": 16,
+    "name": "TÄRNABY Table Lamp",
+    "category": "Lighting",
+    "description": "Retro-style table lamp with soft, ambient light.",
+    "price": 24.99,
+    "imageUrl": "https://example.com/images/tarnaby-lamp.jpg"
+  },
+  {
+    "id": 17,
+    "name": "LOHALS Rug",
+    "category": "Decor",
+    "description": "Flatwoven jute rug for natural texture and style.",
+    "price": 99.99,
+    "imageUrl": "https://example.com/images/lohals-rug.jpg"
+  },
+  {
+    "id": 18,
+    "name": "SKÅDIS Pegboard",
+    "category": "Office",
+    "description": "Wall-mounted pegboard for organizing tools or accessories.",
+    "price": 19.99,
+    "imageUrl": "https://example.com/images/skadis-pegboard.jpg"
+  },
+  {
+    "id": 19,
+    "name": "GRÖNLID Loveseat",
+    "category": "Living Room",
+    "description": "Cozy 2-seat sofa with plush cushions and a classic look.",
+    "price": 399.99,
+    "imageUrl": "https://example.com/images/gronlid-loveseat.jpg"
+  },
+  {
+    "id": 20,
+    "name": "VARIERA Drawer Mat",
+    "category": "Kitchen",
+    "description": "Keeps drawers clean and prevents utensils from sliding.",
+    "price": 5.99,
+    "imageUrl": "https://example.com/images/variera-mat.jpg"
+  },
+  {
+    "id": 21,
+    "name": "NORDLI Bedside Table",
+    "category": "Bedroom",
+    "description": "Minimalist nightstand with a push-to-open drawer.",
+    "price": 59.99,
+    "imageUrl": "https://example.com/images/nordli-table.jpg"
+  },
+  {
+    "id": 22,
+    "name": "ANTILOP High Chair",
+    "category": "Children",
+    "description": "Easy-to-clean high chair with safety belt.",
+    "price": 19.99,
+    "imageUrl": "https://example.com/images/antilop-chair.jpg"
+  },
+  {
+    "id": 23,
+    "name": "VITTSJÖ Laptop Table",
+    "category": "Office",
+    "description": "Tempered glass desk ideal for small workspaces.",
+    "price": 49.99,
+    "imageUrl": "https://example.com/images/vittsjo-table.jpg"
+  },
+  {
+    "id": 24,
+    "name": "RIBBA Frame",
+    "category": "Decor",
+    "description": "Simple picture frame for wall or tabletop display.",
+    "price": 9.99,
+    "imageUrl": "https://example.com/images/ribba-frame.jpg"
   }
 ]

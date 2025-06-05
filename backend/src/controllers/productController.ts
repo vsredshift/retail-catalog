@@ -18,6 +18,7 @@ export const getAllProducts = (req: Request, res: Response) => {
 
   if (page > totalPages && totalItems > 0) {
     res.status(400).json({ message: "Page number exceeds the total pages" });
+    return;
   }
 
   const startIndex = (page - 1) * limit;

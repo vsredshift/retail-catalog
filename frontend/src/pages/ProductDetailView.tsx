@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import type { Product } from "../types/product";
-import sofa from "../assets/sofa.jpg";
-import axios from "axios";
+import sofa from "../assets/sofa.jpg"
+import { api } from "../api";
 
 const ProductDetailView = () => {
   const { id } = useParams();
@@ -14,8 +14,8 @@ const ProductDetailView = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get<Product>(
-          `http://localhost:5000/v1/api/products/${id}`
+        const res = await api.get<Product>(
+          `/products/${id}`
         );
         setProduct(res.data);
       } catch (err) {

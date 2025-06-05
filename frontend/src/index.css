@@ -76,7 +76,27 @@ button:focus-visible {
   margin-right: 0.5rem;
   font-size: 1.2rem;
 }
+.show-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+.show-more-btn:hover {
+  background-color: #1e40af;
+}
+
+.show-more-btn:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
 
 /* Product List Grid */
 .product-list {
@@ -181,7 +201,7 @@ button:focus-visible {
   border-radius: 8px;
 }
 
-.heading {
+.home-container {
   padding-left: 1rem;
 }
 
