@@ -17,10 +17,11 @@ export const getAllProducts = (req: Request, res: Response) => {
  * @access      Private
  */
 export const createProduct = (req: Request, res: Response) => {
-  const { name, category, description, price, imageUrl } = req.body as Product;
+  const { name, category, description, price, imageUrl } = req.body;
 
   if (!name || !category || !description || !price || !imageUrl) {
-    return res.status(400).json({ message: "All fields are required" });
+    res.status(400).json({ message: "All fields are required" });
+    return;
   }
 
   const newProduct: Product = {
@@ -34,4 +35,23 @@ export const createProduct = (req: Request, res: Response) => {
 
   addProduct(newProduct);
   res.status(201).json(newProduct);
+};
+
+/**
+ * @description Get a single product
+ * @route       GET v1/api/products/:id
+ * @access      Public
+ */
+export const getProductById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const products = getProducts();
+
+  const product = products.find((p) => p.id === Number(id));
+  
+  if (!product) {
+    res.status(404).json({ message: "Product not found" });
+    return;
+  }
+
+  res.json(product);
 };
