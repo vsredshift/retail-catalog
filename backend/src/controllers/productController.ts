@@ -94,7 +94,7 @@ export const searchProducts = (req: Request, res: Response) => {
 
   const searchTerm = name.toLowerCase().trim();
   const allProducts = getProducts();
-  const maxDistance = 2; // For fuzzy match, e.g., "kalax" vs "kallax"
+  const maxDistance = 3; // For fuzzy match, e.g., "kalax" vs "kallax"
 
   const matches = allProducts
     .map((product) => {
