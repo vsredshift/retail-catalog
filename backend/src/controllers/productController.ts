@@ -3,12 +3,34 @@ import { addProduct, getProducts } from "../data/products.js";
 import { Product } from "../models/product.js";
 
 /**
- * @description Get all products
- * @route       GET v1/api/products
+ * @description Get paginated list of products
+ * @route       GET v1/api/products?page=1&limit=10
  * @access      Public
  */
 export const getAllProducts = (req: Request, res: Response) => {
-  res.json(getProducts());
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 10;
+
+  const allProducts = getProducts();
+  const totalItems = allProducts.length;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  if (page > totalPages && totalItems > 0) {
+    res.status(400).json({ message: "Page number exceeds the total pages" });
+  }
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+
+  const paginated = allProducts.slice(startIndex, endIndex);
+
+  res.json({
+    page,
+    limit,
+    totalItems,
+    totalPages,
+    data: paginated,
+  });
 };
 
 /**
@@ -47,7 +69,7 @@ export const getProductById = (req: Request, res: Response) => {
   const products = getProducts();
 
   const product = products.find((p) => p.id === Number(id));
-  
+
   if (!product) {
     res.status(404).json({ message: "Product not found" });
     return;
