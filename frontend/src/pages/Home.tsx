@@ -6,41 +6,65 @@ import { api } from "../api";
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalItems, setTotalItems] = useState(0);
-  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const limit = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await api.get(`/products`, {
-          params: { page, limit },
-        });
+        let res;
 
-        const newProducts = res.data.products;
-        setProducts((prev) => [...prev, ...newProducts]);
-        setTotalItems(res.data.totalItems);
+        if (searchTerm.trim() === "") {
+          res = await api.get(`/products`, { params: { page: 1, limit } });
+          setProducts(res.data.products);
+          setTotalItems(res.data.totalItems);
+        } else {
+          res = await api.get(`/search`, { params: { name: searchTerm } });
+          setProducts(res.data.results || []);
+          setTotalItems(res.data.count || 0);
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
+        setProducts([]);
+        setTotalItems(0);
       }
     };
+
     fetchProducts();
-  }, [page]);
+  }, [searchTerm]);
 
   return (
     <div className="home-container">
       <h1>Product Catalog</h1>
-      <p>Showing {Math.min(page * limit, totalItems)} of {totalItems} products</p>
+
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        style={{ marginBottom: "1rem", textAlign: "center" }}
+      >
+        <input
+          type="text"
+          placeholder="Search products"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            padding: "0.5rem 1rem",
+            borderRadius: "0.5rem",
+            border: "1px solid #ccc",
+            fontSize: "1rem",
+            width: "60%",
+            maxWidth: "400px",
+          }}
+        />
+      </form>
+
+      <p>
+        Showing {products.length} of {totalItems} products
+        {searchTerm && ` matching "${searchTerm}"`}
+      </p>
+
       <ProductList products={products} />
-      {products.length < totalItems ? (
-        <button
-          className="show-more-btn"
-          onClick={() => setPage((prev) => prev + 1)}
-        >
-          Show More
-        </button>
-      ) : (
-        <p className="no-more-products">No more products to show.</p>
-      )}
+
+      {products.length === 0 && <p className="no-products">No products found.</p>}
     </div>
   );
 };
