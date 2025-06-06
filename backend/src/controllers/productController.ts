@@ -95,27 +95,36 @@ export const searchProducts = (req: Request, res: Response) => {
 
   const searchTerm = name.toLowerCase().trim();
   const allProducts = getProducts();
-  const maxDistance = 3; // For fuzzy match, e.g., "kalax" vs "kallax"
+  const maxDistance = 2; // For fuzzy match, e.g., "kalax" vs "kallax"
 
   const matches = allProducts
-    .map((product) => {
-      const productName = product.name.toLowerCase();
-      const nameWords = productName.split(/\s+/);
+  .map((product) => {
+    const productName = product.name.toLowerCase();
+    const nameWords = productName.split(/\s+/);
 
-      const score = (() => {
-        if (productName.startsWith(searchTerm)) return 0;
-        if (productName.includes(searchTerm)) return 1;
-        if (nameWords.some((word) => word.startsWith(searchTerm))) return 2;
+    const score = (() => {
+      if (productName.startsWith(searchTerm)) return 0;
+      if (productName.includes(searchTerm)) return 1;
+      if (nameWords.some((word) => word.startsWith(searchTerm))) return 2;
 
-        const distance = damerauLevenshtein(productName, searchTerm);
-        return distance <= maxDistance ? 3 + distance : Infinity;
-      })();
+      // Check for fuzzy matches within the product name
+      const nameDistance = damerauLevenshtein(productName, searchTerm);
+      if (nameDistance <= maxDistance) return 3 + nameDistance;
 
-      return { product, score };
-    })
-    .filter((entry) => entry.score !== Infinity)
-    .sort((a, b) => a.score - b.score)
-    .map((entry) => entry.product);
+      // Check for fuzzy matches within each word in the product name
+      const wordMatches = nameWords.map((word) => {
+        const wordDistance = damerauLevenshtein(word, searchTerm);
+        return wordDistance <= maxDistance ? wordDistance : Infinity;
+      });
+
+      const minWordDistance = Math.min(...wordMatches);
+      return minWordDistance === Infinity ? Infinity : 3 + minWordDistance;
+    })();
+
+    return { product, score };
+  })
+  .filter(({ score }) => score < Infinity)
+  .sort((a, b) => a.score - b.score);
 
   res.json({
     count: matches.length,

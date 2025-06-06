@@ -3,11 +3,13 @@ import type { Product } from "../types/product";
 import { ProductList } from "../components/ProductList";
 import { api } from "../api";
 
+const limit = 6;
+
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalItems, setTotalItems] = useState(0);
+  const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const limit = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -15,13 +17,16 @@ const Home = () => {
         let res;
 
         if (searchTerm.trim() === "") {
-          res = await api.get(`/products`, { params: { page: 1, limit } });
-          setProducts(res.data.products);
+          res = await api.get(`/products`, { params: { page, limit } });
+          const fetchedProducts = res.data.products;
+          setProducts((prev) => [...prev, ...fetchedProducts]);
           setTotalItems(res.data.totalItems);
         } else {
           res = await api.get(`/search`, { params: { name: searchTerm } });
-          setProducts(res.data.results || []);
-          setTotalItems(res.data.count || 0);
+          const results = res.data.results || [];
+          const productsFromSearch = results.map((r: any) => r.product);
+          setProducts(productsFromSearch);
+          setTotalItems(res.data.count);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -30,20 +35,33 @@ const Home = () => {
       }
     };
 
-    fetchProducts();
+    const debounceTimer = setTimeout(fetchProducts, 300);
+
+    return () => clearTimeout(debounceTimer);
+  }, [page, searchTerm]);
+
+  // Reset page to 1 when searchTerm changes
+  useEffect(() => {
+    setPage(1);
   }, [searchTerm]);
+
+  const isSearching = searchTerm.trim() !== "";
+  const showPagination = !isSearching && products.length < totalItems;
+  const showNoProducts = products.length === 0;
 
   return (
     <div className="home-container">
       <h1>Product Catalog</h1>
 
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
         style={{ marginBottom: "1rem", textAlign: "center" }}
       >
         <input
           type="text"
-          placeholder="Search products"
+          placeholder="Search products..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
@@ -58,13 +76,25 @@ const Home = () => {
       </form>
 
       <p>
-        Showing {products.length} of {totalItems} products
-        {searchTerm && ` matching "${searchTerm}"`}
+        {isSearching
+          ? `Found ${products.length} products matching "${searchTerm}"`
+          : `Showing ${products.length} of ${totalItems} products`}
       </p>
 
-      <ProductList products={products} />
+      <>
+        <ProductList products={products} />
 
-      {products.length === 0 && <p className="no-products">No products found.</p>}
+        {showPagination ? (
+          <button
+            className="show-more-btn"
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Show More
+          </button>
+        ) : showNoProducts ? (
+          <p>No products found.</p>
+        ) : null}
+      </>
     </div>
   );
 };
