@@ -1,5 +1,13 @@
 {
-  "dependencies": {
-    "react-router-dom": "^7.6.2"
+  "name": "retail-catalog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
